@@ -51,13 +51,20 @@
                 android:textSize="15sp"
                 android:visibility="invisible"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/info"
+                android:id="@+id/coverpage"
+                android:src="@drawable/books"/>
+
             <TextView
                 android:id="@+id/bookName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
-                android:layout_below="@id/info"
+                android:layout_below="@id/coverpage"
                 android:text="--"
                 android:textColor="#000"
                 android:textSize="30sp"
@@ -79,12 +86,23 @@
                 android:textStyle="italic" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/author"
+                android:id="@+id/description"
+                android:layout_alignLeft="@+id/contactPerson"
+                android:layout_alignStart="@+id/contactPerson"
+                android:layout_marginBottom="12dp"
+                android:text="--"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/contactPerson"
                 android:layout_alignStart="@+id/contactPerson"
-                android:layout_below="@+id/author"
+                android:layout_below="@+id/description"
                 android:layout_marginBottom="12dp"
                 android:text="--"
                 android:textColor="#996600"

@@ -28,8 +28,8 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
 
     Button getLoc;
     ImageView submit;
-    EditText bnText, anText, rText, cpText, cnText, locText, oInfText;
-    Boolean isEdit;
+    public static EditText rText, cpText, cnText, locText, oInfText;
+    public static Boolean isEdit;
     private Toolbar toolbar;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     String TAG= "Add Book activity";
@@ -37,6 +37,8 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
     private Button getIsbn;
     private int BARCODE_REQUEST_CODE= 2;
     public static Book book;
+    public static StringBuffer isbnData, cpData, cnData, locData, rData;
+    public static StringBuffer personId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
         isEdit = getIntent().getBooleanExtra("edit", false);
         if(isEdit) {
             toolbar.setTitle("Edit Book");
-            bnText.setText(MainActivity.clickedBook.getBookName());
-            anText.setText(MainActivity.clickedBook.getAuthor());
+            isbnText.setText(MainActivity.clickedBook.getIsbn());
             rText.setText(MainActivity.clickedBook.getRent());
             cpText.setText(MainActivity.clickedBook.getContactPerson());
             cnText.setText(MainActivity.clickedBook.getContact());
@@ -74,17 +75,18 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
         mFDb= FirebaseDatabase.getInstance();
         mRef= mFDb.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        final String personId = currentUser.getUid();
+        personId = new StringBuffer(currentUser.getUid());
+        //
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int flag=0;
-                final String isbnData= isbnText.getText().toString();
-                final String rData= rText.getText().toString();
-                final String cpData= cpText.getText().toString();
-                final String cnData= cnText.getText().toString();
-                final String locData= locText.getText().toString();
+                isbnData= new StringBuffer(isbnText.getText().toString());
+                rData= new StringBuffer(rText.getText().toString());
+                cpData= new StringBuffer(cpText.getText().toString());
+                cnData= new StringBuffer(cnText.getText().toString());
+                locData= new StringBuffer(locText.getText().toString());
                 if(TextUtils.isEmpty(isbnData))
                 {
                     isbnText.setError("Please scan book ISBN");
@@ -113,23 +115,10 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
 
                 if(flag==0)
                 {
-                    String key;
-                    if(!isEdit) {
-                        // call to func with firebase code to add book
-                        key = mRef.push().getKey();
-
-                    }
-                    else {
-                        key = MainActivity.clickedBook.getPushKey();
-                    }
-                    book = new Book(isbnData, cnData, cpData,
-                            rData, locData, oInfText.getText().toString(),
-                            personId, key, String.valueOf(Details.isOn));
                     GoogleApiRequest gar= new GoogleApiRequest(AddBookScan.this);
                     gar.execute(String.valueOf(isbnText.getText()));
-                    mRef.child(key).setValue(book);
                     if(isEdit) {
-                        MainActivity.clickedBook = book;
+                        //MainActivity.clickedBook = book;
                         startActivity(new Intent(AddBookScan.this, Details.class));
                     }
                     finish();

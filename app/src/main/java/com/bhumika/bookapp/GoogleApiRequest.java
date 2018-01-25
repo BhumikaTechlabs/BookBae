@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,13 +22,16 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 
 // Received ISBN from Barcode Scanner. Send to GoogleBooks to obtain book information.
-class GoogleApiRequest extends AsyncTask<String, Object, JSONObject> {
+class GoogleApiRequest extends AsyncTask<String, Object, Book> {
 
     private ConnectivityManager mConnectivityManager;
     Context context;
+    Book b;
+    StringBuffer key;
+    private DatabaseReference mRef= FirebaseDatabase.getInstance()
+            .getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
 
     public GoogleApiRequest(Context c) {
-
         context= c;
     }
 
@@ -39,6 +44,20 @@ class GoogleApiRequest extends AsyncTask<String, Object, JSONObject> {
             cancel(true);
             return;
         }
+
+        //
+        if(!AddBookScan.isEdit) {
+            // call to func with firebase code to add book
+            key = new StringBuffer(mRef.push().getKey());
+
+        }
+        else {
+            key = new StringBuffer(MainActivity.clickedBook.getPushKey());
+        }
+        b = new Book(String.valueOf(AddBookScan.isbnData), String.valueOf(AddBookScan.cnData),
+                String.valueOf(AddBookScan.cpData), String.valueOf(AddBookScan.rData),
+                String.valueOf(AddBookScan.locData), String.valueOf(AddBookScan.oInfText.getText()),
+                String.valueOf(AddBookScan.personId), String.valueOf(key), String.valueOf(Details.isOn));
     }
 
     @Override
@@ -58,6 +77,7 @@ class GoogleApiRequest extends AsyncTask<String, Object, JSONObject> {
                 connection.setRequestMethod("GET");
                 connection.setReadTimeout(5000); // 5 seconds
                 connection.setConnectTimeout(5000); // 5 seconds
+                connection.setRequestProperty("key", "AIzaSyAMWQ98LpELmMy3_4vMnSTX46gf4TCXME4");
             } catch (MalformedURLException e) {
                 // Impossible: The only two URLs used in the app are taken from string resources.
                 e.printStackTrace();
@@ -84,21 +104,20 @@ class GoogleApiRequest extends AsyncTask<String, Object, JSONObject> {
             Log.d(getClass().getName(), "Response String: " + responseString);
             JSONObject responseJson = new JSONObject(responseString);
             //
-            Book tempBook= AddBookScan.book;
-            JSONArray volInfo= responseJson.getJSONArray("items").getJSONObject(0)
-                    .getJSONArray("volumeInfo");
-            tempBook.setBookName(volInfo.getString(0));
-            Log.d(getClass().getName(),volInfo.getString(0));
-            tempBook.setDescription(volInfo.getString(4));
-            tempBook.setImageUrl(volInfo.getJSONArray(15).getString(1));
+            JSONObject volInfo= responseJson.getJSONArray("items").getJSONObject(0)
+                    .getJSONObject("volumeInfo");
+            b.setBookName(volInfo.getString("title"));
+            Log.d(getClass().getName(),volInfo.getString("title"));
+            b.setDescription(volInfo.getString("description"));
+            b.setImageUrl(volInfo.getJSONObject("imageLinks").getString("thumbnail"));
             StringBuffer authors= new StringBuffer("");
-            for(int i=0; i<volInfo.getJSONArray(2).length(); ++i)
-                authors.append(volInfo.getJSONArray(2).getString(i));
-            tempBook.setAuthor(String.valueOf(authors));
+            for(int i=0; i<volInfo.getJSONArray("authors").length(); ++i)
+                authors.append(volInfo.getJSONArray("authors").getString(i));
+            b.setAuthor(String.valueOf(authors));
             //
             // Close connection and return response code.
             connection.disconnect();
-            return tempBook;
+            return b;
         } catch (SocketTimeoutException e) {
             Log.w(getClass().getName(), "Connection timed out. Returning null");
             return null;
@@ -121,8 +140,9 @@ class GoogleApiRequest extends AsyncTask<String, Object, JSONObject> {
         } else if (b == null) {
             //---showSimpleDialog(getResources().getString(R.string.dialog_null_response));
         } else {
-
             // All went well. Do something with your new JSONObject.
+            mRef.child(String.valueOf(key)).setValue(b);
+            MainActivity.clickedBook= b;
         }
     }
 

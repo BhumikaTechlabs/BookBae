@@ -9,9 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Details extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView bookName, author, rent, contactPerson, contact, location, otherInfo, info;
+    private TextView bookName, author, rent, contactPerson, contact, location, otherInfo, info, descrp;
     private Toolbar toolbar;
     private Button deleteBtn, editBtn;
     private ToggleButton toggleBtn;
@@ -27,6 +29,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
     private boolean isUser, fromEdit;
     private FirebaseDatabase mFDb;
     private DatabaseReference mRef;
+    ImageView img;
 
 
     @Override
@@ -39,6 +42,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         
         isUser = getIntent().getBooleanExtra("fromUser", false);
 
+        img= findViewById(R.id.coverpage);
         info= findViewById(R.id.info);
         bookName= (TextView) findViewById(R.id.bookName);
         author = (TextView) findViewById(R.id.author);
@@ -47,6 +51,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         contactPerson = (TextView) findViewById(R.id.contactPerson);
         location= (TextView) findViewById(R.id.location);
         otherInfo= (TextView) findViewById(R.id.otherInfo);
+        descrp= findViewById(R.id.description);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
         editBtn = (Button) findViewById(R.id.editBtn);
         toggleBtn= findViewById(R.id.togglebutton);
@@ -64,12 +69,16 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+        Glide.with(this.getApplicationContext())
+                .load(MainActivity.clickedBook.getImageUrl())
+                .into(img);
         bookName.setText(""+MainActivity.clickedBook.getBookName());
         author.setText("by  "+MainActivity.clickedBook.getAuthor());
         contact.setText(""+MainActivity.clickedBook.getContact());
         contactPerson.setText("Contact:\n"+MainActivity.clickedBook.getContactPerson());
         rent.setText("Borrow for Rs. "+MainActivity.clickedBook.getRent()+"/week");
         location.setText("Location:\n"+MainActivity.clickedBook.getLocation());
+        descrp.setText("Description:\n"+MainActivity.clickedBook.getDescription());
         if(!TextUtils.isEmpty(MainActivity.clickedBook.getOtherInfo()))
         {
             otherInfo.setText("Other Information:\n"+MainActivity.clickedBook.getOtherInfo());
