@@ -21,12 +21,36 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_margin="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/bookName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_bar"
+                android:layout_marginLeft="10dp"
+                android:text="BOOK NAME"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bookName"
+                android:layout_alignStart="@id/bookName"
+                android:text="AUTHOR"
+                android:textColor="#990000"
+                android:textSize="25sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="10dp"
+                android:layout_alignLeft="@id/bookName" />
 
             <ToggleButton
                 android:id="@+id/togglebutton"
@@ -39,7 +63,7 @@
                 android:fontFamily="@font/courgette"
                 android:textOff="Lended"
                 android:textOn="Available"
-                android:layout_below="@id/app_bar"/>
+                android:layout_below="@id/coverpage"/>
 
             <TextView
                 android:id="@+id/info"
@@ -52,107 +76,80 @@
                 android:textSize="15sp"
                 android:visibility="invisible"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/info"
-                android:id="@+id/coverpage"
-                android:src="@drawable/books"/>
-
-            <TextView
-                android:id="@+id/bookName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@id/coverpage"
-                android:text="--"
-                android:textColor="#000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/bookName"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:text="--"
-                android:textColor="#990000"
-                android:textSize="25sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rent"
-                android:id="@+id/description"
-                android:layout_alignLeft="@+id/contactPerson"
-                android:layout_alignStart="@+id/contactPerson"
-                android:layout_marginBottom="12dp"
-                android:text="--"
-                android:textSize="20sp" />
-
             <TextView
                 android:id="@+id/rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/contactPerson"
-                android:layout_alignStart="@+id/contactPerson"
+                android:layout_alignStart="@id/bookName"
                 android:layout_below="@+id/author"
-                android:layout_marginBottom="12dp"
-                android:text="--"
+                android:layout_marginBottom="10dp"
+                android:text="rent"
                 android:textColor="#996600"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignLeft="@id/bookName" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rent"
+                android:id="@+id/coverpage"
+                android:src="@drawable/books"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/info"
+                android:id="@+id/description"
+                android:layout_alignLeft="@+id/bookName"
+                android:layout_alignStart="@+id/bookName"
+                android:layout_marginBottom="10dp"
+                android:text="Description"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/contactPerson"
-                android:layout_alignStart="@+id/contactPerson"
+                android:layout_alignLeft="@+id/bookName"
+                android:layout_alignStart="@+id/bookName"
                 android:layout_below="@+id/description"
-                android:layout_marginBottom="12dp"
-                android:text="--"
+                android:layout_marginBottom="10dp"
+                android:text="Location"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/author"
-                android:layout_alignStart="@+id/author"
+                android:layout_alignLeft="@+id/bookName"
+                android:layout_alignStart="@+id/bookName"
                 android:layout_below="@id/contactPerson"
-                android:layout_marginBottom="12dp"
                 android:autoLink="phone"
                 android:linksClickable="true"
                 android:text="1234512345"
                 android:textColorLink="#00F"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/contactPerson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/contact"
-                android:layout_alignStart="@+id/contact"
+                android:layout_alignLeft="@+id/bookName"
+                android:layout_alignStart="@+id/bookName"
                 android:layout_below="@+id/location"
-                android:text="--"
+                android:text="Contact person"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/otherInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/contactPerson"
-                android:layout_alignStart="@+id/contactPerson"
+                android:layout_alignLeft="@+id/bookName"
+                android:layout_alignStart="@+id/bookName"
                 android:layout_below="@+id/contact"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
                 android:text="--"
                 android:textSize="20sp" />
 

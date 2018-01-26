@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
     public static List<Book> mFilteredList;
     List<Book> searchData;
     public int position;
+    Context c;
 
     public int getPosition() {
         return this.position;
@@ -39,6 +43,7 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
     public MyBooksAdapter(Context context, List<Book> data)
     {
         inflater= LayoutInflater.from(context);
+        c= context;
         this.data= data;
         mFilteredList = data;
     }
@@ -159,8 +164,8 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        TextView bookName;
-        TextView author;
+        TextView bookName, author;
+        ImageView bookImg;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -168,6 +173,7 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
             itemView.setOnLongClickListener(this);
             bookName= (TextView) itemView.findViewById(R.id.bookName);
             author= (TextView) itemView.findViewById(R.id.author);
+            bookImg= itemView.findViewById(R.id.bookImg);
         }
 
         @Override
@@ -181,6 +187,17 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
         public void bind(Book bookx) {
             bookName.setText(bookx.getBookName());
             author.setText(bookx.getAuthor());
+            if(!bookx.getImageUrl().isEmpty())
+            {
+                Glide.with(c)
+                        .load(bookx.getImageUrl())
+                        .into(bookImg);
+            }
+            else
+            {
+                bookImg.setImageResource(R.drawable.books);
+                bookImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            }
         }
 
         @Override

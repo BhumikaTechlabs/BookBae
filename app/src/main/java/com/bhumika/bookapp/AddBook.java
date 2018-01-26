@@ -1,4 +1,4 @@
-/*package com.bhumika.bookapp;
+package com.bhumika.bookapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -121,9 +121,13 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
                     else {
                         key = MainActivity.clickedBook.getPushKey();
                     }
-                    Book book = new Book(bnData, anData, cnData, cpData,
+                    Book book = new Book("", cnData, cpData,
                             rData, locData, oInfText.getText().toString(),
                             personId, key, String.valueOf(Details.isOn));
+                    book.setWasFound("false");
+                    book.setBookName(bnData);
+                    book.setAuthor(anData);
+                    book.setDescription("NONE");
                     mRef.child(key).setValue(book);
                     if(isEdit) {
                         MainActivity.clickedBook = book;
@@ -189,4 +193,3 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
         findPlace(locText);
     }
 }
-*/

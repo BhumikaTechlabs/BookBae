@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class User extends AppCompatActivity
     private Toolbar toolbar;
     FirebaseDatabase database;
     DatabaseReference myRef;
+    Button noIsbn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class User extends AppCompatActivity
 
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+        noIsbn= findViewById(R.id.noIsbn);
+        noIsbn.setOnClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
@@ -144,7 +149,15 @@ public class User extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        addBook();
+        switch (view.getId())
+        {
+            case R.id.addButton:
+                addBook();
+                break;
+            case R.id.noIsbn:
+                startActivity(new Intent(User.this, AddBook.class));
+                break;
+        }
     }
 
     @Override

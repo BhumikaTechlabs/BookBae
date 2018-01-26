@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,6 +42,7 @@ class GoogleApiRequest extends AsyncTask<String, Object, Book> {
         if (isNetworkConnected() == false) {
             // Cancel request.
             Log.i(getClass().getName(), "Not connected to the internet");
+            Toast.makeText(context, "No Internet Connection !", Toast.LENGTH_SHORT).show();
             cancel(true);
             return;
         }
@@ -120,6 +122,7 @@ class GoogleApiRequest extends AsyncTask<String, Object, Book> {
             return b;
         } catch (SocketTimeoutException e) {
             Log.w(getClass().getName(), "Connection timed out. Returning null");
+            Toast.makeText(context, "Connection timeout!\nTry again later", Toast.LENGTH_SHORT).show();
             return null;
         } catch (IOException e) {
             Log.d(getClass().getName(), "IOException when connecting to Google Books API.");
@@ -138,9 +141,12 @@ class GoogleApiRequest extends AsyncTask<String, Object, Book> {
             // Request was cancelled due to no network connection.
             //---showNetworkDialog();
         } else if (b == null) {
+            Toast.makeText(context, "Sorry! ISBN not recognized", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Use button at top", Toast.LENGTH_SHORT).show();
             //---showSimpleDialog(getResources().getString(R.string.dialog_null_response));
         } else {
             // All went well. Do something with your new JSONObject.
+            b.setWasFound("true");
             mRef.child(String.valueOf(key)).setValue(b);
             MainActivity.clickedBook= b;
         }

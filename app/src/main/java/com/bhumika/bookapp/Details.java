@@ -69,11 +69,15 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
-        Glide.with(this.getApplicationContext())
-                .load(MainActivity.clickedBook.getImageUrl())
-                .into(img);
+        if(!MainActivity.clickedBook.getImageUrl().isEmpty())
+        {
+            Glide.with(this.getApplicationContext())
+                    .load(MainActivity.clickedBook.getImageUrl())
+                    .into(img);
+        }
+
         bookName.setText(""+MainActivity.clickedBook.getBookName());
-        author.setText("by  "+MainActivity.clickedBook.getAuthor());
+        author.setText("by "+MainActivity.clickedBook.getAuthor());
         contact.setText(""+MainActivity.clickedBook.getContact());
         contactPerson.setText("Contact:\n"+MainActivity.clickedBook.getContactPerson());
         rent.setText("Borrow for Rs. "+MainActivity.clickedBook.getRent()+"/week");
@@ -131,10 +135,20 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Details.this, AddBookScan.class);
-                i.putExtra("edit", true);
-                startActivity(i);
-                finish();
+                if(MainActivity.clickedBook.getWasFound().equalsIgnoreCase("true"))
+                {
+                    Intent i = new Intent(Details.this, AddBookScan.class);
+                    i.putExtra("edit", true);
+                    startActivity(i);
+                    finish();
+                }
+                else
+                {
+                    Intent i = new Intent(Details.this, AddBook.class);
+                    i.putExtra("edit", true);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
     }

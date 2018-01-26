@@ -37,10 +37,11 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 String shareBody = "We understand your insatiable thirst for reading. " +
                         "And how you have always wanted to read all those books out there!"
                         +"\n\nWe have got your back! With BOOK BAE you can locate books nearby and borrow them for the best price!" +
-                        "\n\nWhy just let your books sit on the shelf while they could get you some" +
-                        " green, hard cash and somebody a good week's reading? " +
+                        "\n\nYour books deserve more readers than a place on the shelf! " +
+                        "They can give someone a good week's reading! " +
                         "Lend for the best prices to the community and get served!" +
-                        "\n\nDownload BOOK BAE :\n\n <LINK>";
+                        "\n\nDownload BOOK BAE :\n\n <LINK>"
+                        +"\n\nBecause happiness should be shared!";
                 String subject = "BOOK BAE";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
@@ -49,7 +50,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
             case R.id.contact:
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("plain/text");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "bstech@gmail.com" });
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tech.bs.98@gmail.com" });
                 intent.putExtra(Intent.EXTRA_SUBJECT, "BOOK BAE");
                 intent.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(intent, ""));
