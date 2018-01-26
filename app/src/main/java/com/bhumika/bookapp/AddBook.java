@@ -176,6 +176,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 locText.setText(""+place.getName()+",\n"+place.getAddress());
+                //locText.setText(""+place.getName());
                 Log.i(TAG, "Place: " + place.getName());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);

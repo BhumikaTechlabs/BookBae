@@ -110,7 +110,7 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
 
                         if (//(book.getBookName().toLowerCase().contains(charString) ||
                             //book.getAuthor().toLowerCase().contains(charString))
-                                book.getLocation().contains(MainActivity.searchLoc)) {
+                                book.getLocation().toLowerCase().contains(MainActivity.searchLoc)) {
 
                             filteredList.add(book);
                         }

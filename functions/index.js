@@ -27,6 +27,74 @@ exports.sendPush = functions.database.ref('/Books/{bookId}').onCreate(event => {
     
 });
 
+//
+
+const nodemailer = require('nodemailer');
+
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword
+  }
+});
+
+// Your company name to include in the emails
+// TODO: Change this to your app or company name to customize the email sent.
+const APP_NAME = 'BOOK BAE';
+
+
+exports.sendWelcomeEmail = functions.auth.user().onCreate(event=> {
+    const displayName= event.data.displayName
+    const email= event.data.email
+
+    return sendWelcomeEmail(email, displayName);
+
+});
+
+// Sends a welcome email to the given user.
+function sendWelcomeEmail(email, displayName) {
+  const mailOptions = {
+    from: `noreply@bookbae.com`,
+    to: email
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `Welcome to ${APP_NAME}!`;
+  mailOptions.text = `Hey ${displayName || ''},\n\nWelcome to ${APP_NAME}! We hope you will enjoy our service. To get started, how about uploading a few books of your own? And yeah, set an attractive price!\n\nLovely to have you here. Let's get started!`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New welcome email sent to:', email);
+  });
+}
+
+//
+
+exports.sendFeedbackEmail = functions.database.ref('/Feedbacks/{feedbackId}').onCreate(event=> {
+
+    const usr= event.data.val().user;
+    const fbk= event.data.val().feedback
+    
+    return sendFeedbackEmail(usr, fbk);
+
+});
+
+// Sends a welcome email to the given user.
+function sendFeedbackEmail(usr, fbk) {
+  const mailOptions = {
+    from: `noreply@bookbae.com`,
+    to: 'tech.bs.98@gmail.com'
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `A feedback was posted!`;
+  mailOptions.text = 'Hey BOOK BAE,\n\nA feedback was posted by '+usr+'.\n\nFEEDBACK:\n'+fbk;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Feedback email sent to:', 'tech.bs.98@gmail.com');
+  });
+}
+
 /*exports.sendPush2 = functions.database.ref('/Books/{bookId}').onWrite(event => {
     let projectStateChanged = false;
     let projectCreated = false;

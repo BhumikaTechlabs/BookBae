@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 searchLoc= ""+place.getName()+",\n"+place.getAddress();
+                //searchLoc= ""+place.getName();
                 MyApp.flag=1;
                 adapter.getFilter().filter("");
                 Log.i(TAG, "Place: " + place.getName());
