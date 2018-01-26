@@ -20,23 +20,23 @@
                 android:id="@+id/bookName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:layout_marginLeft="10dp"
-                android:textSize="25sp"
+                android:fontFamily="@font/nosifer"
+                android:text="TextView"
                 android:textColor="#000"
-                />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="by TextView"
-                android:textStyle="italic"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
                 android:layout_below="@id/bookName"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/courgette"
+                android:text="by TextView"
                 android:textColor="#555"
-                />
+                android:textSize="15sp"
+                android:textStyle="italic" />
 
         </RelativeLayout>
 

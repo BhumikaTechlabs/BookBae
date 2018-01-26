@@ -3,29 +3,19 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ccc">
+        android:background="#eee">
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_below="@id/app_bar"
-        android:layout_height="wrap_content"
-        android:text="Your contributions"
-        android:id="@+id/heading"
-        android:textStyle="italic"
-        android:layout_margin="20dp"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:textColor="#000"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/myBooksList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/heading"
+            android:layout_below="@id/app_bar"
             android:scrollbars="vertical"
             android:scrollbarThumbVertical="@color/colorPrimaryDark"
             android:scrollbarSize="2dp">

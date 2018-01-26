@@ -32,12 +32,13 @@
                 android:id="@+id/togglebutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textNIcons"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:enabled="false"
-                android:textColor="@color/textNIcons"
-                android:textOff="LENDED"
-                android:textOn="AVAILABLE"
+                android:fontFamily="@font/courgette"
+                android:textOff="Lended"
+                android:textOn="Available"
                 android:layout_below="@id/app_bar"/>
 
             <TextView
@@ -88,7 +89,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/author"
+                android:layout_below="@id/rent"
                 android:id="@+id/description"
                 android:layout_alignLeft="@+id/contactPerson"
                 android:layout_alignStart="@+id/contactPerson"
@@ -102,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/contactPerson"
                 android:layout_alignStart="@+id/contactPerson"
-                android:layout_below="@+id/description"
+                android:layout_below="@+id/author"
                 android:layout_marginBottom="12dp"
                 android:text="--"
                 android:textColor="#996600"
@@ -115,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/contactPerson"
                 android:layout_alignStart="@+id/contactPerson"
-                android:layout_below="@+id/rent"
+                android:layout_below="@+id/description"
                 android:layout_marginBottom="12dp"
                 android:text="--"
                 android:textSize="20sp" />

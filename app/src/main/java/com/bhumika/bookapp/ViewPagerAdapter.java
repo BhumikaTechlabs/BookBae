@@ -1,6 +1,7 @@
 package com.bhumika.bookapp;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -43,6 +45,13 @@ public class ViewPagerAdapter extends PagerAdapter{
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view= layoutInflater.inflate(R.layout.login_view_pager, null);
+
+        LinearLayout ll = view.findViewById(R.id.ll);
+        AnimationDrawable animationDrawable = (AnimationDrawable) ll.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
+
         ImageView iv = view.findViewById(R.id.imageView);
         iv.setImageResource(slides[position]);
         TextView tv = view.findViewById(R.id.text);

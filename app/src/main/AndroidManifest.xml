@@ -39,7 +39,7 @@
             android:label="Add Book" />
         <activity
             android:name=".BarcodeScannerActivity"
-            android:label="Add Book" />
+            android:label="Scan ISBN" />
         <activity
             android:name=".Details"
             android:label="Book Details" />
