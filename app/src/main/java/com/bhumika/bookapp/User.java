@@ -190,6 +190,10 @@ public class User extends AppCompatActivity
             case R.id.giveFeedback:
                 startActivity(new Intent(this, Feedback.class));
                 break;
+
+            case R.id.settings:
+                startActivity(new Intent(this, MySettings.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

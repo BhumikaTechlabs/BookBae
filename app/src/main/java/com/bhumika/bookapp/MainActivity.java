@@ -1,7 +1,10 @@
 package com.bhumika.bookapp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -56,11 +59,16 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_appbar);
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
-        spinner.setVisibility(View.GONE);
 
+            spinner = (ProgressBar)findViewById(R.id.progressBar1);
+            spinner.setVisibility(View.GONE);
 
-        toolbar= (Toolbar)findViewById(R.id.app_bar);
+            //askForPermission(Manifest.permission.CAMERA, 1);
+            //askForPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, 2);
+            //askForPermission(Manifest.permission.INTERNET, 4);
+            //askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, 3);
+
+            toolbar= (Toolbar)findViewById(R.id.app_bar);
             setSupportActionBar(toolbar);
 
             locFilter= (ImageButton) findViewById(R.id.locBtn);
@@ -88,6 +96,32 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
                     getSupportFragmentManager().findFragmentById(R.id.fragment_nav_drawer);
             drawerFragment.setUp(R.id.fragment_nav_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
+
+    private void askForPermission(String permission, Integer requestCode)
+    {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+        }
+   /*     else
+        {
+            if(requestCode==1)
+                Toast.makeText(this, "" + "RECORD AUDIO permission" + " is already granted.", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "" + "WRITE EXTERNAL STORAGE permission" + " is already granted.", Toast.LENGTH_SHORT).show();
+        }
+        */
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+            return;
+        }
+    }
+
 
     public List<Book> getData()
     {
@@ -171,6 +205,10 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
 
             case R.id.giveFeedback:
                 startActivity(new Intent(this, Feedback.class));
+                break;
+
+            case R.id.settings:
+                startActivity(new Intent(this, MySettings.class));
                 break;
             //case android.R.id.home:
             //    NavUtils.navigateUpFromSameTask(this);

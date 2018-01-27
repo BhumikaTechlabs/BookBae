@@ -31,6 +31,6 @@
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="30sp"
-        tools:fontFamily="@font/courgette" />
+        tools:fontFamily="@font/amaranth" />
 
 </LinearLayout>

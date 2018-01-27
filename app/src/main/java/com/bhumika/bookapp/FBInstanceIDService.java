@@ -18,8 +18,10 @@ public class FBInstanceIDService extends FirebaseInstanceIdService {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("FBToken:", "Refreshed token: " + refreshedToken);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
-
+        if(getApplicationContext().getSharedPreferences("MyPref", 0).getBoolean("recieveNotifications", Boolean.parseBoolean("")))
+            FirebaseMessaging.getInstance().subscribeToTopic("newBooks");
+        else
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("newBooks");
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.

@@ -3,10 +3,7 @@
     package="com.bhumika.bookapp">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApp"
@@ -27,7 +24,7 @@
         </service>
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".AddBook"/>
+        <activity android:name=".AddBook" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +54,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvoPAeuwASdJfrriPzrZisYTkwEZxAhpI" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
+        <activity android:name=".MySettings"
+            android:label="Settings"></activity>
     </application>
 
 </manifest>

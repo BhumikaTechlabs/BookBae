@@ -23,7 +23,7 @@ exports.sendPush = functions.database.ref('/Books/{bookId}').onCreate(event => {
             }
         };
 
-        return admin.messaging().sendToTopic('/topics/all', payload);
+        return admin.messaging().sendToTopic('/topics/newBooks', payload);
     
 });
 

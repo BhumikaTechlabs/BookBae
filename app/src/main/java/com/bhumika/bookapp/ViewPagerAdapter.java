@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.google.android.gms.internal.zzagr.runOnUiThread;
+
 /**
  * Created by Admin on 10/01/2018.
  */
@@ -20,11 +25,17 @@ public class ViewPagerAdapter extends PagerAdapter{
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] slides = { R.drawable.map, R.drawable.icon_book};
+    private Integer [] slides = { R.drawable.map, R.drawable.handshake, R.drawable.bestbooks, R.drawable.brokenpiggybank, R.drawable.icon_book};
     private String [] texts = {
             "Grab your latest interests!\nLocate books nearby",
+            "Deal at the\nbest price\n& get started",
+            "Your books deserve more readers\nthan a place on\nthe shelf",
+            "Lend books,\nearn, save\n & get rewarded!",
             "BOOK BAE\n\nHappy Reading!"
     };
+    private Timer timer;
+    int page=1;
+    private ViewPager vp;
 
     public ViewPagerAdapter(Context context)
     {
@@ -56,16 +67,8 @@ public class ViewPagerAdapter extends PagerAdapter{
         iv.setImageResource(slides[position]);
         TextView tv = view.findViewById(R.id.text);
         tv.setText(texts[position]);
-        switch(position)
-        {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-        }
-        ViewPager vp = (ViewPager) container;
+        //--//
+        vp = (ViewPager) container;
         vp.addView(view, 0);
         return view;
     }
@@ -76,5 +79,29 @@ public class ViewPagerAdapter extends PagerAdapter{
         ViewPager vp = (ViewPager) container;
         View v = (View) object;
         vp.removeView(v);
+    }
+
+    public void pageSwitcher(int seconds) {
+        timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
+        // in
+        // milliseconds
+    }
+
+    // this is an inner class...
+    class RemindTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            // As the TimerTask run on a seprate thread from UI thread we have
+            // to call runOnUiThread to do work on UI thread.
+            runOnUiThread(new Runnable() {
+                public void run() {
+                        vp.setCurrentItem(page++);
+                }
+            });
+
+        }
     }
 }
