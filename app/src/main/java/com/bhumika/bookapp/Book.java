@@ -10,7 +10,6 @@ public class Book extends JSONObject {
     String rent="", pushKey="", avlbl="";
     String isbn="";
     String wasFound="";
-    //File image;
 
     public Book() {}
 
@@ -28,7 +27,6 @@ public class Book extends JSONObject {
         user= u;
         pushKey= p;
         avlbl=avl;
-        //image= ;
     }
 
     public String getWasFound() {

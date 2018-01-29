@@ -33,6 +33,7 @@
 
             </android.support.v7.widget.RecyclerView>
 
+            <!--
             <ImageButton
                 android:id="@+id/locBtn"
                 android:layout_width="65dp"
@@ -46,7 +47,7 @@
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/location"
                 android:background="@drawable/oval"
-                android:elevation="10dp"/>
+                android:elevation="10dp"/> -->
 
             <ProgressBar
                 android:id="@+id/progressBar1"

@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,11 +20,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,8 +33,8 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MyBooksAdapter.BooksClickListener, SearchView.OnQueryTextListener, View.OnClickListener {
-
+public class MainActivity extends AppCompatActivity implements MyBooksAdapter.BooksClickListener, SearchView.OnQueryTextListener//, View.OnClickListener
+{
     private static ArrayList<Book> books;
     private Toolbar toolbar;
     private Button addBookButton;
@@ -53,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
     private String TAG= "Main activity";
     public static String searchLoc= "";
     private ProgressBar spinner;
+    private GeoFire geoFire;
+    private GeoQuery geoQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +70,15 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             toolbar= (Toolbar)findViewById(R.id.app_bar);
             setSupportActionBar(toolbar);
 
-            locFilter= (ImageButton) findViewById(R.id.locBtn);
-            locFilter.setOnClickListener(this);
+            //locFilter= (ImageButton) findViewById(R.id.locBtn);
+            //locFilter.setOnClickListener(this);
 
             database = FirebaseDatabase.getInstance();
             myRef = database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+
+            geoFire = new GeoFire(database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Locations_Books"));
+            geoQuery = geoFire.queryAtLocation(new GeoLocation(18.5411726, 73.72813050000002), 2.0);
+
             //if (MyApp.flag==0)
             mQuery = myRef.orderByChild("pushKey");
             bookList = (RecyclerView) findViewById(R.id.bookList);
@@ -207,9 +210,10 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
                 startActivity(new Intent(this, Feedback.class));
                 break;
 
-            case R.id.settings:
+            /*case R.id.settings:
                 startActivity(new Intent(this, MySettings.class));
                 break;
+               */
             //case android.R.id.home:
             //    NavUtils.navigateUpFromSameTask(this);
         }
@@ -239,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
     }
 
     //
-    public void findPlace(View view) {
+   /* public void findPlace(View view) {
         try {
             Intent intent =
                     new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
@@ -276,7 +280,43 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
 
     @Override
     public void onClick(View view) {
-        findPlace(locFilter);
+        //findPlace(locFilter);
+        geoQueryFilter();
+    }
+
+    private void geoQueryFilter() {
+
+        askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, 5);
+
+        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
+            @Override
+            public void onKeyEntered(String key, GeoLocation location) {
+                System.out.println(String.format("Key %s entered the search area at [%f,%f]", key, location.latitude, location.longitude));
+            }
+
+            @Override
+            public void onKeyExited(String key) {
+                System.out.println(String.format("Key %s is no longer in the search area", key));
+                books.remove(this);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+                System.out.println(String.format("Key %s moved within the search area to [%f,%f]", key, location.latitude, location.longitude));
+            }
+
+            @Override
+            public void onGeoQueryReady() {
+                System.out.println("All initial data has been loaded and events have been fired!");
+            }
+
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
+                System.err.println("There was an error with this query: " + error);
+            }
+        });
+
     }
 
     @Override
@@ -288,6 +328,6 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             searchLoc="";
             adapter.getFilter().filter("");
         }
-    }
+    } */
 }
 

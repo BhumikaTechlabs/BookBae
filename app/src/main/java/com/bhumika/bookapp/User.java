@@ -191,9 +191,9 @@ public class User extends AppCompatActivity
                 startActivity(new Intent(this, Feedback.class));
                 break;
 
-            case R.id.settings:
+           /* case R.id.settings:
                 startActivity(new Intent(this, MySettings.class));
-                break;
+                break; */
         }
         return super.onOptionsItemSelected(item);
     }
@@ -209,9 +209,9 @@ public class User extends AppCompatActivity
         return true;
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
-    }
+    } */
 }

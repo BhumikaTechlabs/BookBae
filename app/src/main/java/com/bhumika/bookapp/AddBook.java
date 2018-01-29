@@ -33,6 +33,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     String TAG= "Add Book activity";
+    Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
         oInfText = (EditText) findViewById(R.id.oInfText);
         getLoc = findViewById(R.id.getLoc);
         getLoc.setOnClickListener(this);
+
+        book= new Book();
 
         isEdit = getIntent().getBooleanExtra("edit", false);
         if(isEdit) {
@@ -121,7 +124,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
                     else {
                         key = MainActivity.clickedBook.getPushKey();
                     }
-                    Book book = new Book("", cnData, cpData,
+                    book = new Book("", cnData, cpData,
                             rData, locData, oInfText.getText().toString(),
                             personId, key, String.valueOf(Details.isOn));
                     book.setWasFound("false");
@@ -142,7 +145,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    @Override
+ /*   @Override
     public void onBackPressed() {
         if(isEdit)
         {
@@ -154,6 +157,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
         else
             super.onBackPressed();
     }
+    */
 
     //
     public void findPlace(View view) {

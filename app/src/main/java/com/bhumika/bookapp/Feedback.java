@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -50,6 +51,7 @@ public class Feedback extends AppCompatActivity {
                     FeedbackModel feedBk = new FeedbackModel(feedbackTxt, dispName, personId);
                     String key= mRef.push().getKey();
                     mRef.child(key).setValue(feedBk);
+                    Toast.makeText(Feedback.this, "Your feedback was recorded. Thank You!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

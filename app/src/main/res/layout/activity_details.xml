@@ -40,7 +40,8 @@
                 android:text="BOOK NAME"
                 android:textColor="#000"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="NotSibling" />
 
             <TextView
                 android:id="@+id/author"
@@ -97,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rent"
                 android:id="@+id/coverpage"
-                android:src="@drawable/books"/>
+                android:src="@drawable/books"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +109,7 @@
                 android:layout_alignLeft="@+id/bookName"
                 android:layout_alignStart="@+id/bookName"
                 android:layout_marginBottom="10dp"
-                android:text="Description"
+                android:text=""
                 android:textSize="20sp" />
 
             <TextView

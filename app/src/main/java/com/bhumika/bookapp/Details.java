@@ -82,7 +82,8 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         contactPerson.setText("Contact:\n"+MainActivity.clickedBook.getContactPerson());
         rent.setText("Borrow for Rs. "+MainActivity.clickedBook.getRent()+"/week");
         location.setText("Location:\n"+MainActivity.clickedBook.getLocation());
-        descrp.setText("Description:\n"+MainActivity.clickedBook.getDescription());
+        if(Boolean.parseBoolean(MainActivity.clickedBook.getWasFound()))
+            descrp.setText("Description:\n"+MainActivity.clickedBook.getDescription());
         if(!TextUtils.isEmpty(MainActivity.clickedBook.getOtherInfo()))
         {
             otherInfo.setText("Other Information:\n"+MainActivity.clickedBook.getOtherInfo());
@@ -161,7 +162,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         //MainActivity.clickedBook= null;
     }
 
-    @Override
+/*    @Override
     public void onBackPressed() {
         if(isUser)
         {
@@ -174,7 +175,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
             finish();
         }
     }
-
+*/
 
     @Override
     public void onClick(View view) {

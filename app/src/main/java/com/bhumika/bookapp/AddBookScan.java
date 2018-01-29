@@ -48,6 +48,8 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+        book= new Book();
+
         isbnText= (EditText) findViewById(R.id.isbnText);
         //isbnText.setEnabled(false);
         getIsbn= findViewById(R.id.getIsbn);
@@ -129,7 +131,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
 
 
     }
-
+/*
     @Override
     public void onBackPressed() {
         if(isEdit)
@@ -142,6 +144,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
         else
             super.onBackPressed();
     }
+    */
 
     //
     public void findPlace(View view) {

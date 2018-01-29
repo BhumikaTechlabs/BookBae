@@ -30,7 +30,9 @@
                 android:layout_marginTop="20dp"
                 android:text="BOOK NAME"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="23dp" />
 
             <EditText
                 android:id="@+id/bnText"
@@ -40,7 +42,8 @@
                 android:layout_below="@+id/bookName"
                 android:ems="10"
                 android:hint="Which book you got?"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/bookName" />
 
             <TextView
                 android:id="@+id/authorName"
@@ -50,7 +53,8 @@
                 android:layout_below="@+id/bnText"
                 android:text="AUTHOR NAME"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/bnText" />
 
             <EditText
                 android:id="@+id/anText"
@@ -60,7 +64,8 @@
                 android:layout_below="@+id/authorName"
                 android:ems="10"
                 android:hint="Tell us the Author!"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/authorName" />
 
             <TextView
                 android:id="@+id/rent"
@@ -70,7 +75,8 @@
                 android:layout_below="@+id/anText"
                 android:text="RENT/WEEK"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/anText" />
 
             <EditText
                 android:id="@+id/rText"
@@ -80,7 +86,8 @@
                 android:layout_below="@+id/rent"
                 android:ems="10"
                 android:hint="INRs to make you happy"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/rent" />
 
             <TextView
                 android:id="@+id/contactPerson"
@@ -90,7 +97,8 @@
                 android:layout_below="@+id/rText"
                 android:text="CONTACT PERSON"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/rText" />
 
             <EditText
                 android:id="@+id/cpText"
@@ -100,7 +108,8 @@
                 android:layout_below="@+id/contactPerson"
                 android:ems="10"
                 android:hint="Who are you?"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/contactPerson" />
 
             <TextView
                 android:id="@+id/contact"
@@ -110,7 +119,8 @@
                 android:layout_below="@+id/cpText"
                 android:text="CONTACT NUMBER"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/cpText" />
 
             <EditText
                 android:id="@+id/cnText"
@@ -120,7 +130,8 @@
                 android:layout_below="@+id/contact"
                 android:ems="10"
                 android:hint="Your number please?"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/contact" />
 
             <ImageView
                 android:id="@+id/submit"
@@ -146,7 +157,8 @@
                 android:text="LOCATION"
                 android:textSize="15sp"
                 tools:text="LOCATION"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/cnText" />
 
             <EditText
                 android:id="@+id/locText"
@@ -156,7 +168,8 @@
                 android:layout_below="@+id/location"
                 android:ems="10"
                 android:hint="Provide precise location"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:layout_alignLeft="@+id/location" />
 
             <Button
                 android:id="@+id/getLoc"
@@ -179,7 +192,8 @@
                 android:layout_below="@+id/getLoc"
                 android:text="OTHER INFORMATION"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/locText" />
 
             <EditText
                 android:id="@+id/oInfText"
