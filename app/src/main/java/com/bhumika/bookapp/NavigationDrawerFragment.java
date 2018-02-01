@@ -168,7 +168,7 @@ implements MyAdapter.ClickListener
             case 0:
                 Intent intent= new Intent(getActivity(), User.class);
                 startActivity(intent);
-                //getActivity().finish();
+                getActivity().finish();
                 break;
             case 1:
                 //FirebaseAuth.getInstance().signOut();

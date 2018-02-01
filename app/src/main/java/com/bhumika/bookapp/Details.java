@@ -82,7 +82,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         contactPerson.setText("Contact:\n"+MainActivity.clickedBook.getContactPerson());
         rent.setText("Borrow for Rs. "+MainActivity.clickedBook.getRent()+"/week");
         location.setText("Location:\n"+MainActivity.clickedBook.getLocation());
-        if(Boolean.parseBoolean(MainActivity.clickedBook.getWasFound()))
+        if(!(MainActivity.clickedBook.getDescription().equals("NONE")))
             descrp.setText("Description:\n"+MainActivity.clickedBook.getDescription());
         if(!TextUtils.isEmpty(MainActivity.clickedBook.getOtherInfo()))
         {

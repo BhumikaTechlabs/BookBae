@@ -214,9 +214,10 @@ public class User extends AppCompatActivity
         return true;
     }
 
-  /*  @Override
+    @Override
     public void onBackPressed() {
+        NavigationDrawerFragment.isDrawerOpen= false;
         startActivity(new Intent(this, MainActivity.class));
         finish();
-    } */
+    }
 }
