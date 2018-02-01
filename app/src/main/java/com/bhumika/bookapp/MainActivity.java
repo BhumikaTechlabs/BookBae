@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
     private ProgressBar spinner;
     private GeoFire geoFire;
     private GeoQuery geoQuery;
+    NavigationDrawerFragment drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-            NavigationDrawerFragment drawerFragment;
             drawerFragment= (NavigationDrawerFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_nav_drawer);
             drawerFragment.setUp(R.id.fragment_nav_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
@@ -177,8 +178,6 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-             //   Toast.makeText(MainActivity.this, "Failed to load Books! Check your Internet Connection",
-             //           Toast.LENGTH_SHORT).show();
                 databaseError.toException().printStackTrace();
             }
         };
@@ -329,5 +328,13 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             adapter.getFilter().filter("");
         }
     } */
+
+    @Override
+    public void onBackPressed() {
+        if(NavigationDrawerFragment.isDrawerOpen)
+            drawerFragment.mDrawerLayout.closeDrawer(drawerFragment.containerView);
+        else
+            super.onBackPressed();
+    }
 }
 

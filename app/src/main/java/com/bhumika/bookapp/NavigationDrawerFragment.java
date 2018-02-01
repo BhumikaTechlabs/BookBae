@@ -32,13 +32,15 @@ implements MyAdapter.ClickListener
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
-    private View containerView;
+    public static DrawerLayout mDrawerLayout;
+    public static View containerView;
     private static final String PREF_FILE_NAME="testpref";
     private static final String KEY_USER_LEARNED_DRAWER="user ;earned drawer";
+    //
     private boolean mUserLearnedDrawer, mFromSavedInstanceState;
     private ImageView pp;
     private TextView dispName, email;
+    public static boolean isDrawerOpen=false;
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -106,11 +108,13 @@ implements MyAdapter.ClickListener
                 }
                 containerView.setClickable(true);
                 getActivity().invalidateOptionsMenu();
+                isDrawerOpen=true;
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                isDrawerOpen= false;
                 getActivity().invalidateOptionsMenu();
             }
 
@@ -164,7 +168,7 @@ implements MyAdapter.ClickListener
             case 0:
                 Intent intent= new Intent(getActivity(), User.class);
                 startActivity(intent);
-                getActivity().finish();
+                //getActivity().finish();
                 break;
             case 1:
                 //FirebaseAuth.getInstance().signOut();
@@ -175,4 +179,5 @@ implements MyAdapter.ClickListener
                 break;
         }
     }
+
 }

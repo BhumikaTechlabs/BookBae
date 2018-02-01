@@ -120,7 +120,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
                     GoogleApiRequest gar= new GoogleApiRequest(AddBookScan.this);
                     gar.execute(String.valueOf(isbnText.getText()));
                     if(isEdit) {
-                        //MainActivity.clickedBook = book;
+                        MainActivity.clickedBook = book;
                         startActivity(new Intent(AddBookScan.this, Details.class));
                     }
                     finish();

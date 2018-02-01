@@ -106,7 +106,12 @@ public class User extends AppCompatActivity
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Book b1= dataSnapshot.getValue(Book.class);
-                books.add(b1);
+                for (int i = 0; i < books.size(); i++) {
+                    if(b1!=null && books.get(i).getPushKey().equals(b1.getPushKey())){
+                        books.set(i, b1);
+                        break;
+                    }
+                }
                 adapter.notifyDataSetChanged();
             }
 

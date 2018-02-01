@@ -11,7 +11,7 @@ let functions = require('firebase-functions');
 let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.sendPush = functions.database.ref('/Books/{bookId}').onCreate(event => {
+/*exports.sendPush = functions.database.ref('/Books/{bookId}').onCreate(event => {
 	let bookData = event.data.val();
 	
 	let payload = {
@@ -25,7 +25,7 @@ exports.sendPush = functions.database.ref('/Books/{bookId}').onCreate(event => {
 
         return admin.messaging().sendToTopic('/topics/newBooks', payload);
     
-});
+}); */
 
 //
 
