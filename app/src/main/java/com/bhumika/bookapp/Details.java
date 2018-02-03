@@ -68,6 +68,8 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         toggleBtn.setOnClickListener(this);
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if(!MainActivity.clickedBook.getImageUrl().isEmpty())
         {
@@ -197,5 +199,11 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

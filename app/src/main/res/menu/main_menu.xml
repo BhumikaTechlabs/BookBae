@@ -18,6 +18,7 @@
         android:id="@+id/giveFeedback"
         android:title="Give feedback"
         />
+
 <!--
     <item
         android:id="@+id/settings"

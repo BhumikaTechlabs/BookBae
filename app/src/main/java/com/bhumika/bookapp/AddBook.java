@@ -42,6 +42,8 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
 
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         bnText = (EditText) findViewById(R.id.bnText);
         anText = (EditText) findViewById(R.id.anText);
@@ -196,5 +198,11 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         findPlace(locText);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -52,6 +52,8 @@ public class User extends AppCompatActivity
 
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         noIsbn= findViewById(R.id.noIsbn);
         noIsbn.setOnClickListener(this);
@@ -219,5 +221,11 @@ public class User extends AppCompatActivity
         NavigationDrawerFragment.isDrawerOpen= false;
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

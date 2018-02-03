@@ -47,6 +47,8 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
 
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         book= new Book();
 
@@ -203,5 +205,11 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
                         BARCODE_REQUEST_CODE);
                 break;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

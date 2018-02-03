@@ -8,5 +8,4 @@
     app:titleTextColor="@color/textNIcons"
     android:theme="@style/ToolbarTheme">
 
-
 </android.support.v7.widget.Toolbar>

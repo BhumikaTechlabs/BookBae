@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class About extends AppCompatActivity implements View.OnClickListener {
 
     Button share, contact;
     private Toolbar toolbar;
+    ImageButton backIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 
         toolbar= (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         share= (Button) findViewById(R.id.share);
         share.setOnClickListener(this);
@@ -55,6 +59,14 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(intent, ""));
                 break;
+
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }
