@@ -95,6 +95,55 @@ function sendFeedbackEmail(usr, fbk) {
   });
 }
 
+exports.sendNewBookEmailToAdmin = functions.database.ref('/Books/{bookId}').onCreate(event=> {
+
+    const wasFound= event.data.val().wasFound;
+    const user= event.data.val().contactPerson;
+    const bn= event.data.val().bookName;
+    
+    return sendNewBookEmailToAdmin(wasFound, user, bn);
+
+});
+
+// Sends a welcome email to the given user.
+function sendNewBookEmailToAdmin(wasFound, user, bn) {
+  const mailOptions = {
+    from: `noreply@bookbae.com`,
+    to: 'tech.bs.98@gmail.com'
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `A new book just got added!`;
+  mailOptions.text = 'Hey BOOK BAE,\n\nA new book was posted by '+user+'.\n\nBOOK NAME:\n'+bn+'\n\nBook isbn found: '+wasFound;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New book email sent to:', 'tech.bs.98@gmail.com');
+  });
+}
+
+exports.sendNewUserEmailToAdmin = functions.auth.user().onCreate(event=> {
+
+    const displayName= event.data.displayName
+    const email= event.data.email
+
+    return sendNewUserEmailToAdmin(email, displayName);
+
+});
+
+// Sends a welcome email to the given user.
+function sendNewUserEmailToAdmin(email, displayName) {
+  const mailOptions = {
+    from: `noreply@bookbae.com`,
+    to: 'tech.bs.98@gmail.com'
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `You got a new user!`;
+  mailOptions.text = 'Hey BOOK BAE,\n\n'+displayName+' just joined BOOK BAE.\nWe sent a welcome email to them on\n\nE-mail id:\n'+email;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New user email sent to:', 'tech.bs.98@gmail.com');
+  });
+}
+
 /*exports.sendPush2 = functions.database.ref('/Books/{bookId}').onWrite(event => {
     let projectStateChanged = false;
     let projectCreated = false;
