@@ -94,7 +94,7 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.MyViewHo
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
 
-                String charString = charSequence.toString();
+                String charString = charSequence.toString().toLowerCase();
 
                 //no constraints
                 if (charString.isEmpty() && MainActivity.searchLoc.isEmpty())

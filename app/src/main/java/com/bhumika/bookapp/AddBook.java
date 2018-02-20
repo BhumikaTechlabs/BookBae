@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -183,11 +182,11 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 locText.setText(""+place.getName()+",\n"+place.getAddress());
                 //locText.setText(""+place.getName());
-                Log.i(TAG, "Place: " + place.getName());
+                //Log.i(TAG, "Place: " + place.getName());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
-                Log.i(TAG, status.getStatusMessage());
+               // Log.i(TAG, status.getStatusMessage());
 
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
