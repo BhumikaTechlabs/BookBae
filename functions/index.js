@@ -120,6 +120,31 @@ function sendNewBookEmailToAdmin(wasFound, user, bn) {
   });
 }
 
+exports.sendBookUpdatedEmailToAdmin = functions.database.ref('/Books/{bookId}').onUpdate(event=> {
+
+    const wasFound= event.data.val().wasFound;
+    const user= event.data.val().contactPerson;
+    const bn= event.data.val().bookName;
+    
+    return sendBookUpdatedEmailToAdmin(wasFound, user, bn);
+
+});
+
+// Sends a welcome email to the given user.
+function sendBookUpdatedEmailToAdmin(wasFound, user, bn) {
+  const mailOptions = {
+    from: `noreply@bookbae.com`,
+    to: 'tech.bs.98@gmail.com'
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `A book was updated!`;
+  mailOptions.text = 'Hey BOOK BAE,\n\nA book was updated by '+user+'.\n\nBOOK NAME:\n'+bn+'\n\nBook isbn found: '+wasFound;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Book update email sent to:', 'tech.bs.98@gmail.com');
+  });
+}
+
 exports.sendNewUserEmailToAdmin = functions.auth.user().onCreate(event=> {
 
     const displayName= event.data.displayName
