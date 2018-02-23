@@ -48,7 +48,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                         "\n\nYour books deserve more readers than a place on the shelf! " +
                         "They can give someone a good week's reading! " +
                         "Lend for the best prices to the community and get served!" +
-                        "\n\nDownload BOOK BAE :\n\n <LINK>"
+                        "\n\nDownload BOOK BAE :\n\n https://play.google.com/store/apps/details?id=com.bhumika.bookapp"
                         +"\n\nBecause happiness should be shared!";
                 String subject = "BOOK BAE";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
