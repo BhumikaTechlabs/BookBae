@@ -29,7 +29,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
     private boolean isUser, fromEdit;
     private FirebaseDatabase mFDb;
     private DatabaseReference mRef;
-    ImageView img;
+    ImageView img; char ch='"';
 
 
     @Override
@@ -48,6 +48,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         author = (TextView) findViewById(R.id.author);
         rent= (TextView) findViewById(R.id.rent);
         contact = (TextView) findViewById(R.id.contact);
+        contact.setOnClickListener(this);
         contactPerson = (TextView) findViewById(R.id.contactPerson);
         location= (TextView) findViewById(R.id.location);
         otherInfo= (TextView) findViewById(R.id.otherInfo);
@@ -82,7 +83,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
         author.setText("by "+MainActivity.clickedBook.getAuthor());
         contact.setText(""+MainActivity.clickedBook.getContact());
         contactPerson.setText("Contact:\n"+MainActivity.clickedBook.getContactPerson());
-        rent.setText("Borrow for Rs. "+MainActivity.clickedBook.getRent()+"/week");
+        rent.setText("Borrow for "+MainActivity.clickedBook.getRent()+"/week");
         location.setText("Location:\n"+MainActivity.clickedBook.getLocation());
         if(!(MainActivity.clickedBook.getDescription().equals("NONE")))
             descrp.setText("Description:\n"+MainActivity.clickedBook.getDescription());
@@ -197,6 +198,15 @@ public class Details extends AppCompatActivity implements View.OnClickListener {
                 } else {
                     view.setBackgroundColor(getResources().getColor(R.color.myblue));
                 }
+                break;
+            case R.id.contact:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { ""+MainActivity.clickedBook.getContact() });
+                intent.putExtra(Intent.EXTRA_SUBJECT, "BOOK BAE: Borrow "+
+                        ch+MainActivity.clickedBook.getBookName()+ch);
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(intent, ""));
                 break;
         }
     }

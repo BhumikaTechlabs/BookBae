@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/isbn"
                 android:ems="10"
-                android:hint="Type in or Scan barcode"
+                android:hint="Type in OR Scan barcode"
                 android:inputType="textMultiLine"
                 android:layout_alignStart="@+id/rent"
                 android:layout_alignLeft="@+id/rent" />
@@ -71,7 +71,7 @@
                 android:layout_alignStart="@+id/rent"
                 android:layout_below="@+id/rent"
                 android:ems="10"
-                android:hint="INRs to make you happy"
+                android:hint="Expected amount"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="10dp"
                 android:layout_alignLeft="@+id/rent" />
@@ -94,7 +94,7 @@
                 android:layout_alignStart="@+id/contactPerson"
                 android:layout_below="@+id/contactPerson"
                 android:ems="10"
-                android:hint="Who are you?"
+                android:hint="Your name"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="10dp"
                 android:layout_alignLeft="@+id/contactPerson" />
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/cpText"
                 android:layout_below="@+id/cpText"
-                android:text="CONTACT NUMBER"
+                android:text="E-MAIL ADDRESS"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_alignLeft="@+id/cpText" />
@@ -117,7 +117,7 @@
                 android:layout_alignStart="@+id/contact"
                 android:layout_below="@+id/contact"
                 android:ems="10"
-                android:hint="Your number please?"
+                android:hint="Your contact details"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="10dp"
                 android:layout_alignLeft="@+id/contact" />
@@ -156,7 +156,7 @@
                 android:layout_alignStart="@+id/location"
                 android:layout_below="@+id/location"
                 android:ems="10"
-                android:hint="Provide precise location"
+                android:hint="Area of book availability"
                 android:inputType="textMultiLine"
                 android:layout_alignLeft="@+id/location" />
 

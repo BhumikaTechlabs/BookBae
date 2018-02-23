@@ -130,10 +130,9 @@
                 android:layout_alignLeft="@+id/bookName"
                 android:layout_alignStart="@+id/bookName"
                 android:layout_below="@id/contactPerson"
-                android:autoLink="phone"
                 android:linksClickable="true"
-                android:text="1234512345"
-                android:textColorLink="#00F"
+                android:text="someid@sxyz.com"
+                android:textColor="#00F"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"/>
 
