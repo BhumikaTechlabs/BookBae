@@ -80,12 +80,12 @@
                 android:id="@+id/contactPerson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/rText"
-                android:layout_below="@+id/rText"
+                android:layout_alignStart="@+id/setCurr"
+                android:layout_below="@+id/setCurr"
                 android:text="CONTACT PERSON"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_alignLeft="@+id/rText" />
+                android:layout_alignLeft="@+id/setCurr" />
 
             <EditText
                 android:id="@+id/cpText"
@@ -193,6 +193,18 @@
                 android:hint="Optional details"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/setCurr"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/textNIcons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/rText"
+                android:layout_below="@+id/rText"
+                android:text="Currency"
+                android:layout_alignLeft="@+id/rText"
+                android:layout_marginBottom="10dp"/>
 
         </RelativeLayout>
 

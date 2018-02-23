@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 public class AddBookScan extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +41,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
     public static Book book;
     public static StringBuffer isbnData, cpData, cnData, locData, rData;
     public static StringBuffer personId;
+    private Button setCurr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
 
         book= new Book();
 
+        setCurr= findViewById(R.id.setCurr);
+        setCurr.setOnClickListener(this);
         isbnText= (EditText) findViewById(R.id.isbnText);
         //isbnText.setEnabled(false);
         getIsbn= findViewById(R.id.getIsbn);
@@ -202,6 +208,21 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
             case R.id.getIsbn:
                 startActivityForResult(new Intent(AddBookScan.this, BarcodeScannerActivity.class),
                         BARCODE_REQUEST_CODE);
+                break;
+            case R.id.setCurr:
+            {
+                final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String symbol, int flagDrawableResID) {
+                        // Implement your code here
+                        rText.append(" "+name);
+                        picker.dismiss();
+                        Toast.makeText(AddBookScan.this, ""+name, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+            }
                 break;
         }
     }

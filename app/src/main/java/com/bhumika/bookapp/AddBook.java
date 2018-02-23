@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -19,13 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 public class AddBook extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseDatabase mFDb;
     private DatabaseReference mRef;
 
-    Button getLoc;
+    Button getLoc, setCurr;
     ImageView submit;
     EditText bnText, anText, rText, cpText, cnText, locText, oInfText;
     Boolean isEdit;
@@ -54,6 +57,8 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
         oInfText = (EditText) findViewById(R.id.oInfText);
         getLoc = findViewById(R.id.getLoc);
         getLoc.setOnClickListener(this);
+        setCurr= findViewById(R.id.setCurr);
+        setCurr.setOnClickListener(this);
 
         book= new Book();
 
@@ -196,7 +201,28 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        findPlace(locText);
+
+        switch (view.getId())
+        {
+            case R.id.getLoc:
+                findPlace(locText);
+                break;
+            case R.id.setCurr:
+            {
+                final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String symbol, int flagDrawableResID) {
+                        // Implement your code here
+                        rText.append(" "+name);
+                        picker.dismiss();
+                        Toast.makeText(AddBook.this, ""+name, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+            }
+            break;
+        }
     }
 
     @Override
