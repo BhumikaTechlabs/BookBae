@@ -24,9 +24,13 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AddBook" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddBook"
+            android:screenOrientation="portrait"
+            android:label="Add Book"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,22 +39,28 @@
         </activity>
         <activity
             android:name=".AddBookScan"
-            android:label="Add Book" />
+            android:label="Add Book"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".BarcodeScannerActivity"
-            android:label="Scan ISBN" />
+            android:label="Scan ISBN"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Details"
-            android:label="Book Details" />
+            android:label="Book Details"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".User"
-            android:label="My Books" />
+            android:label="My Books"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Feedback"
-            android:label="Feedback" />
+            android:label="Feedback"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".About"
-            android:label="About" />
+            android:label="About"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -60,7 +70,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MySettings"
-            android:label="Settings"></activity>
+            android:label="Settings"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,9 @@
 package com.bhumika.bookapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +15,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 
     Button share, contact;
     private Toolbar toolbar;
-    ImageButton backIcon;
+    ImageButton backIcon, rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         share.setOnClickListener(this);
         contact= findViewById(R.id.contact);
         contact.setOnClickListener(this);
-
+        rate= findViewById(R.id.rate);
+        rate.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +63,9 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(intent, ""));
                 break;
+            case R.id.rate:
+                rateApp();
+                break;
 
         }
     }
@@ -67,6 +74,42 @@ public class About extends AppCompatActivity implements View.OnClickListener {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    /*
+* Start with rating the app
+* Determine if the Play Store is installed on the device
+*
+* */
+    public void rateApp()
+    {
+        try
+        {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
+
+    private Intent rateIntentForUrl(String url)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+        }
+        else
+        {
+            //noinspection deprecation
+            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+        }
+        intent.addFlags(flags);
+        return intent;
     }
 
 }
