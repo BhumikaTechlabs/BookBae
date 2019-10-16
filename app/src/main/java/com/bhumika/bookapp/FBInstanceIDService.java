@@ -6,10 +6,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-/**
- * Created by Akshay on 31-12-2017.
- */
-
 public class FBInstanceIDService extends FirebaseInstanceIdService {
 
     @Override
