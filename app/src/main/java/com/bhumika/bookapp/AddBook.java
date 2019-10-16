@@ -75,7 +75,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener {
         }
 
         mFDb= FirebaseDatabase.getInstance();
-        mRef= mFDb.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+        mRef= mFDb.getReferenceFromUrl("your_firebase_url_here").child("Books");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         final String personId = currentUser.getUid();
         submit = findViewById(R.id.submit);
