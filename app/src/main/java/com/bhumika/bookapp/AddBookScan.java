@@ -82,7 +82,7 @@ public class AddBookScan extends AppCompatActivity implements View.OnClickListen
         }
 
         mFDb= FirebaseDatabase.getInstance();
-        mRef= mFDb.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+        mRef= mFDb.getReferenceFromUrl("your_firebase_url_here").child("Books");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         personId = new StringBuffer(currentUser.getUid());
         //
