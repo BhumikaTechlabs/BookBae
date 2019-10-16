@@ -33,7 +33,7 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mFDb= FirebaseDatabase.getInstance();
-        mRef= mFDb.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Feedbacks");
+        mRef= mFDb.getReferenceFromUrl("your_firebase_url_here").child("Feedbacks");
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Feedback.this);
         final String personId = acct.getId();
         final String dispName = acct.getDisplayName();
