@@ -59,7 +59,7 @@ public class User extends AppCompatActivity
         noIsbn.setOnClickListener(this);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+        myRef = database.getReferenceFromUrl("your_firebase_url_here").child("Books");
         myRef.keepSynced(true);
 
         addBookButton= findViewById(R.id.addButton);
