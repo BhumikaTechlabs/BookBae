@@ -30,7 +30,7 @@ class GoogleApiRequest extends AsyncTask<String, Object, Book> {
     Book b;
     StringBuffer key;
     private DatabaseReference mRef= FirebaseDatabase.getInstance()
-            .getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+            .getReferenceFromUrl("your_firebase_url_here").child("Books");
 
     public GoogleApiRequest(Context c) {
         context= c;
@@ -79,7 +79,7 @@ class GoogleApiRequest extends AsyncTask<String, Object, Book> {
                 connection.setRequestMethod("GET");
                 connection.setReadTimeout(5000); // 5 seconds
                 connection.setConnectTimeout(5000); // 5 seconds
-                connection.setRequestProperty("key", "AIzaSyAMWQ98LpELmMy3_4vMnSTX46gf4TCXME4");
+                connection.setRequestProperty("key", "your_api_key_here");
             } catch (MalformedURLException e) {
                 // Impossible: The only two URLs used in the app are taken from string resources.
                 e.printStackTrace();
