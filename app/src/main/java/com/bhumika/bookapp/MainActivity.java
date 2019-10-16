@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements MyBooksAdapter.Bo
             //locFilter.setOnClickListener(this);
 
             database = FirebaseDatabase.getInstance();
-            myRef = database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Books");
+            myRef = database.getReferenceFromUrl("your_firebase_url_here").child("Books");
 
-            geoFire = new GeoFire(database.getReferenceFromUrl("https://booksanta-2b2cc.firebaseio.com/").child("Locations_Books"));
+            geoFire = new GeoFire(database.getReferenceFromUrl("your_firebase_url_here").child("Locations_Books"));
             geoQuery = geoFire.queryAtLocation(new GeoLocation(18.5411726, 73.72813050000002), 2.0);
 
             //if (MyApp.flag==0)
